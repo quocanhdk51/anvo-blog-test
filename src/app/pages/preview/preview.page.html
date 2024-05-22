@@ -1,0 +1,10 @@
+<app-container>
+  <mat-toolbar>
+    <h5>Preview</h5>
+    <span class="spacer"></span>
+    <a mat-flat-button color="primary" routerLink="/editor">Edit</a>
+  </mat-toolbar>
+  <app-content>
+    <quill-view-html [content]="(editorStore.html$ | async) || ''" theme="bubble"></quill-view-html>
+  </app-content>
+</app-container>

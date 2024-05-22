@@ -1,0 +1,75 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 16px 32px;
+}
+
+.sidebar-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.side-button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.5s transform;
+  background-color: white;
+
+  &.toggle-btn {
+    z-index: 1;
+  }
+
+  &__groups {
+    position: absolute;
+    opacity: 0;
+    left: 0px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: 0.5s transform, 0.5s opacity;
+
+    &.displayed {
+      opacity: 1;
+      transform: translateX(36px);
+    }
+  }
+
+  &.opened {
+    transform: rotate(45deg);
+  }
+
+  &:active {
+    background-color: #ebebeb;
+  }
+
+  &>*[role=img] {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.editor {
+  display: block;
+  height: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}

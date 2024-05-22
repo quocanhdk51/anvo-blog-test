@@ -1,0 +1,10 @@
+<app-container *ngIf="{ html: editorStore.html$ | async} as vm">
+  <mat-toolbar>
+    <h5>Editor</h5>
+    <span class="spacer"></span>
+    <a mat-flat-button color="primary" routerLink="/article/preview" [disabled]="!vm.html">Publish</a>
+  </mat-toolbar>
+  <app-content>
+    <app-editor [html]="vm.html" (contentChanged)="onContentChanged($event)"></app-editor>
+  </app-content>
+</app-container>

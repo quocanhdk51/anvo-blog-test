@@ -1,0 +1,30 @@
+<div class="container">
+  <div
+    *ngIf="sidebarPosition() as position"
+    class="sidebar-container"
+    [style.left]="position.left + 'px'"
+    [style.top]="position.top + 'px'">
+    <input #fileUpload [style.display]="'none'" type="file" (change)="onFileUpload($event)">
+    <div class="side-button__groups" [class.displayed]="sidebarOpen()">
+      <button class="side-button" matTooltip="Image" (click)="addImage()">
+        <mat-icon>image</mat-icon>
+      </button>
+    </div>
+    <button
+      class="side-button toggle-btn"
+      [class.opened]="sidebarOpen()"
+      (click)="toggleSideBar()"
+      [matTooltip]="sidebarOpen() ? 'Cancel' : 'Add'"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <quill-editor
+    #editor
+    class="editor"
+    (onEditorChanged)="onEditorChange($event)"
+    (onContentChanged)="onContentChanged($event)"
+    (onEditorCreated)="onEditorCreated()"
+    [customModules]="[]"
+  ></quill-editor>
+</div>
