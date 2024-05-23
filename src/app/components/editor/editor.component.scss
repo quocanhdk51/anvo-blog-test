@@ -73,3 +73,21 @@
   margin-left: auto;
   margin-right: auto;
 }
+.figure-size {
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    color: #ccc;
+  }
+
+  &:hover {
+    mat-icon {
+      color: #fff;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

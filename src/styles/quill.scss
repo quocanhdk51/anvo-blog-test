@@ -1,0 +1,24 @@
+.ql-caption {
+  text-align: center;
+  color: #1c1c1c;
+}
+
+.ql-figure {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  max-width: 50% !important;
+
+  &.ql-size-small {
+    max-width: 50% !important;
+  }
+
+  &.ql-size-large {
+    max-width: 80% !important;
+  }
+
+  &.ql-size-full {
+    min-width: 100% !important;
+  }
+}

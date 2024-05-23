@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  importProvidersFrom,
   input,
   output,
   signal,
@@ -14,14 +13,16 @@ import {
   EditorChangeSelection,
   QuillEditorComponent,
   QuillModule,
+  SelectionChange,
 } from 'ngx-quill';
-import Block from 'quill/blots/block';
+import Block, { BlockEmbed } from 'quill/blots/block';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { Range } from 'quill';
 import { Subscription } from 'rxjs';
+import { FigureBlot, FigureBlotValue } from '../../quill/blots';
 
 const toBase64 = (file: File) =>
   new Promise<string | ArrayBuffer | null>((resolve, reject) => {
@@ -61,6 +62,9 @@ export class EditorComponent {
     left: number;
     top: number;
   } | null>(null);
+
+  readonly toolBarMode = signal<'figure' | 'default'>('default');
+  private _selectedFigure: FigureBlot | null = null;
 
   private _range: Range = { index: 0, length: 0 };
 
@@ -114,7 +118,16 @@ export class EditorComponent {
       return;
     }
 
-    editor.quillEditor.insertEmbed(this._range.index, 'image', url);
+    const figureValue: FigureBlotValue = {
+      src: url,
+      alt: file.name,
+    };
+    editor.quillEditor.insertEmbed(this._range.index, 'figure', figureValue);
+    editor.quillEditor.insertEmbed(
+      this._range.index + 1,
+      'caption',
+      'Image Caption'
+    );
   }
 
   onEditorChange(event: EditorChangeContent | EditorChangeSelection) {
@@ -155,5 +168,30 @@ export class EditorComponent {
 
   onContentChanged(event: ContentChange) {
     this.contentChanged.emit(event.html);
+  }
+
+  onSelectionChanged(event: SelectionChange) {
+    const range = event.range;
+
+    if (!range) {
+      return;
+    }
+
+    const [block] = event.editor.scroll.descendant(BlockEmbed, range.index);
+    if (block && block instanceof FigureBlot) {
+      this.toolBarMode.set('figure');
+      this._selectedFigure = block;
+    } else {
+      this.toolBarMode.set('default');
+      this._selectedFigure = null;
+    }
+  }
+
+  onFigureSizeChange(size: 'small' | 'large' | 'full') {
+    if (!this._selectedFigure) {
+      return;
+    }
+
+    this._selectedFigure.format('size', size);
   }
 }
