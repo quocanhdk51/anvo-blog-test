@@ -1,4 +1,4 @@
-import Block, { BlockEmbed } from 'quill/blots/block';
+import Block from 'quill/blots/block';
 
 export class CaptionBlot extends Block {
   static override blotName = 'caption';
@@ -8,6 +8,7 @@ export class CaptionBlot extends Block {
   static override create(value: string): HTMLElement {
     const node = super.create() as HTMLElement;
     node.innerHTML = value;
+
     return node;
   }
 }

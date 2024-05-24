@@ -26,8 +26,17 @@ export class FigureBlot extends BlockEmbed {
     if (value.alt) {
       img.setAttribute('alt', value.alt || '');
     }
+
     if (value.src) {
       img.setAttribute('src', value.src);
+    }
+
+    if (value.width) {
+      img.style.width = `${value.width}px`;
+    }
+
+    if (value.height) {
+      img.style.height = `${value.height}px`;
     }
 
     node.appendChild(img);
@@ -35,7 +44,7 @@ export class FigureBlot extends BlockEmbed {
   }
 
   static override value(domNode: HTMLElement) {
-    const img = domNode as HTMLImageElement;
+    const img = domNode.querySelector('img') as HTMLImageElement;
 
     return {
       src: img.src,
@@ -83,6 +92,7 @@ export class FigureBlot extends BlockEmbed {
     this._resizeContainer.appendChild(this._resizeBottomRightAnchor);
 
     this.domNode.appendChild(this._resizeContainer);
+
     this._img.addEventListener('click', this._showResizeContainer.bind(this));
     window.document.addEventListener('click', this._onWindowClick);
 
@@ -202,11 +212,11 @@ export class FigureBlot extends BlockEmbed {
   }
 
   private _hideResizeContainer() {
-    this._resizeContainer.style.display = 'none';
+    this._resizeContainer.classList.remove('active');
   }
 
   private _showResizeContainer() {
-    this._resizeContainer.style.display = 'block';
+    this._resizeContainer.classList.add('active');
     this._updateResizeContainer();
   }
 

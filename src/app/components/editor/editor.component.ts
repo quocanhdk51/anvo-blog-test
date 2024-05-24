@@ -13,7 +13,6 @@ import {
   EditorChangeSelection,
   QuillEditorComponent,
   QuillModule,
-  QuillModules,
   SelectionChange,
 } from 'ngx-quill';
 import Block, { BlockEmbed } from 'quill/blots/block';
@@ -23,16 +22,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { Range } from 'quill';
 import { Subscription } from 'rxjs';
-import { CaptionBlot, FigureBlot, FigureBlotValue } from '../../quill/blots';
-import { Context } from 'quill/modules/keyboard';
-
-const toBase64 = (file: File) =>
-  new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-  });
+import { FigureBlot, FigureBlotValue } from '../../quill/blots';
+import { toBase64 } from '../../utils';
 
 @Component({
   selector: 'app-editor',
@@ -79,6 +70,8 @@ export class EditorComponent {
     }
 
     if (editor.quillEditor) {
+      console.log(html);
+
       const delta = editor.quillEditor.clipboard.convert({
         html: html || '',
       });
@@ -170,6 +163,7 @@ export class EditorComponent {
   }
 
   onContentChanged(event: ContentChange) {
+    console.log(event);
     this.contentChanged.emit(event.html);
   }
 
