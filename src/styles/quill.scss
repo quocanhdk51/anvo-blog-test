@@ -4,21 +4,65 @@
 }
 
 .ql-figure {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  height: auto;
-  max-width: 50% !important;
+  position: relative;
 
-  &.ql-size-small {
-    max-width: 50% !important;
+  & > img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    // max-width: 50% !important;
+    cursor: pointer;
   }
 
-  &.ql-size-large {
-    max-width: 80% !important;
+  &.ql-size-small > img {
+    // max-width: 50% !important;
   }
 
-  &.ql-size-full {
-    min-width: 100% !important;
+  &.ql-size-large > img {
+    // max-width: 80% !important;
+  }
+
+  &.ql-size-full > img {
+    // min-width: 100% !important;
+  }
+
+  .ql-resize-container {
+    position: absolute;
+    border: 1px dashed #ccc;
+    cursor: pointer;
+
+    .ql-resize-anchor {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+
+      &.top-left {
+        top: -5px;
+        left: -5px;
+        cursor: nw-resize;
+      }
+
+      &.top-right {
+        top: -5px;
+        right: -5px;
+        cursor: ne-resize;
+      }
+
+      &.bottom-left {
+        bottom: -5px;
+        left: -5px;
+        cursor: sw-resize;
+      }
+
+      &.bottom-right {
+        bottom: -5px;
+        right: -5px;
+        cursor: se-resize;
+      }
+    }
   }
 }

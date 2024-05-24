@@ -10,12 +10,4 @@ export class CaptionBlot extends Block {
     node.innerHTML = value;
     return node;
   }
-
-  override update(
-    mutations: MutationRecord[],
-    context: { [key: string]: any }
-  ): void {
-    console.log(mutations, context);
-    super.update(mutations, context);
-  }
 }

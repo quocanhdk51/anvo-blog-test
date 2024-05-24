@@ -26,6 +26,8 @@
     (onContentChanged)="onContentChanged($event)"
     (onEditorCreated)="onEditorCreated()"
     (onSelectionChanged)="onSelectionChanged($event)"
+    theme="bubble"
+    placeholder="Start writing something awesome..."
   >
     <div quill-editor-toolbar>
       <span class="ql-formats">
@@ -67,6 +69,7 @@
       </span>
       <span class="ql-formats">
         <button class="ql-link"></button>
+        <button class="ql-image"></button>
       </span>
       <span *ngIf="{ mode: toolBarMode() } as vm" class="ql-formats">
         <button

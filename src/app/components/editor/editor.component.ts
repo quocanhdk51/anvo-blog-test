@@ -13,6 +13,7 @@ import {
   EditorChangeSelection,
   QuillEditorComponent,
   QuillModule,
+  QuillModules,
   SelectionChange,
 } from 'ngx-quill';
 import Block, { BlockEmbed } from 'quill/blots/block';
@@ -22,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { Range } from 'quill';
 import { Subscription } from 'rxjs';
-import { FigureBlot, FigureBlotValue } from '../../quill/blots';
+import { CaptionBlot, FigureBlot, FigureBlotValue } from '../../quill/blots';
+import { Context } from 'quill/modules/keyboard';
 
 const toBase64 = (file: File) =>
   new Promise<string | ArrayBuffer | null>((resolve, reject) => {
@@ -122,6 +124,7 @@ export class EditorComponent {
       src: url,
       alt: file.name,
     };
+
     editor.quillEditor.insertEmbed(this._range.index, 'figure', figureValue);
     editor.quillEditor.insertEmbed(
       this._range.index + 1,
