@@ -15,18 +15,6 @@
     cursor: pointer;
   }
 
-  &.ql-size-small > img {
-    // max-width: 50% !important;
-  }
-
-  &.ql-size-large > img {
-    // max-width: 80% !important;
-  }
-
-  &.ql-size-full > img {
-    // min-width: 100% !important;
-  }
-
   .ql-resize-container {
     position: absolute;
     border: 1px dashed #ccc;
